@@ -19,9 +19,10 @@ for(var i =0;i<78;i++) {
 // ==================
 // Spread
 // ==================
+var oneCard = ['the critical factor']
 var threeFates = ['Past','Present','Future']
 var fourfold = ['Physical vision', 'Mental vision', 'Emotional vision','Mystical vision']
-
+var relationship = ['How you see yourself', 'How you see your partner','how you feel about your partner', 'what stands between you two', ' how your partner sees you', 'what your partner feels about you','challenge of the relationship' ]
 // ==================
 // Meaning
 // ==================
@@ -73,15 +74,9 @@ function tirage(num, spread = []) {
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
   while (0 !== currentIndex) {
-
-    // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-    // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
