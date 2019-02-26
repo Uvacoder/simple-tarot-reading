@@ -9,7 +9,12 @@ var minorArcana = [];
 suits.map(suit => suitCards.map(
   card => minorArcana.push(`${card} of ${suit}`)
 ))
-var allCards = majorArcana.concat(minorArcana);
+const allCards = majorArcana.concat(minorArcana);
+
+var deck = [];
+for(var i =0;i<78;i++) {
+  deck.push(i)
+}
 
 // ==================
 // Spread
@@ -36,39 +41,51 @@ function clearTable(){
   ul.innerHTML = "";
 }
 
+var restCards = allCards;
 
 function tirage(num, spread = []) {
   ul.innerHTML = "";
   pullCards = [];
   reverseOrNot = [];
+  var shuffledCard = shuffle(deck);
 
   for(var i=0; i<num; i++) {
-    var x = Math.floor(Math.random() * 78);
     reverseOrNot.push(Math.round(Math.random()))
-    if(pullCards.indexOf(x) == -1) {
-      pullCards.push(x);
-    } else {
-      var y = Math.floor(Math.random() * 78);
-      pullCards.push(y)
-    }
 
-    var keywords = data['tarot_interpretations'][pullCards[i]]['keywords'];
+    var keywords = data['tarot_interpretations'][shuffledCard[i]]['keywords'];
 
     $('ul.card').append(`
       <li class="${positionCard[reverseOrNot[i]]}" style="animation: fadein ${(i+1)*1.2}s;">
       <h1>${(spread[i])? spread[i] : ''}</h1>
-      <h2 class="card-title">${allCards[pullCards[i]]} ${(reverseOrNot[i] == 0 )? '': '(Reversed)'} </h2>
-      <img src="images/${pullCards[i]}.jpg" />
+      <h2 class="card-title">${allCards[shuffledCard[i]]} ${(reverseOrNot[i] == 0 )? '': '(Reversed)'} </h2>
+      <img src="images/${shuffledCard[i]}.jpg" />
       <p class="keywords">${keywords.join(' / ')}</p>
-      <p>${data['tarot_interpretations'][pullCards[i]]['fortune_telling'].join(', ')}</p>
+      <p>${data['tarot_interpretations'][shuffledCard[i]]['fortune_telling'].join(', ')}</p>
 
       <h4>When ${positionCard[reverseOrNot[i]]}</h4>
-      <p>${data['tarot_interpretations'][pullCards[i]]['meanings'][positionCard[reverseOrNot[i]]].join(', ')}</p>
+      <p>${data['tarot_interpretations'][shuffledCard[i]]['meanings'][positionCard[reverseOrNot[i]]].join(', ')}</p>
       </li>
       `
     )
-
   }
 }
 
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
