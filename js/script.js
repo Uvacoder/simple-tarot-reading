@@ -16,6 +16,12 @@ var allCards = majorArcana.concat(minorArcana);
 // ==================
 var threeFates = ['Past','Present','Future']
 var fourfold = ['Physical vision', 'Mental vision', 'Emotional vision','Mystical vision']
+
+// ==================
+// Meaning
+// ==================
+console.log(data['tarot_interpretations'][0]['fortune_telling'].join(', '))
+
 // ==================
 // Variables
 // ==================
@@ -23,7 +29,7 @@ var fourfold = ['Physical vision', 'Mental vision', 'Emotional vision','Mystical
 var positionCard = ['upright', 'reversed']
 var pullCards = [];
 var reverseOrNot = [];
-var ul = document.querySelector('ul');
+var ul = document.querySelector('ul.card');
 
 
 function clearTable(){
@@ -46,15 +52,22 @@ function tirage(num, spread = []) {
       pullCards.push(y)
     }
 
-    $('ul').append(`
-      <li class="${positionCard[reverseOrNot[i]]}" style="animation: fadein ${(i+1)*2}s;">
+    var keywords = data['tarot_interpretations'][pullCards[i]]['keywords'];
+
+    $('ul.card').append(`
+      <li class="${positionCard[reverseOrNot[i]]}" style="animation: fadein ${(i+1)*1.2}s;">
       <h1>${(spread[i])? spread[i] : ''}</h1>
       <h2 class="card-title">${allCards[pullCards[i]]} ${(reverseOrNot[i] == 0 )? '': '(Reversed)'} </h2>
       <img src="images/${pullCards[i]}.jpg" />
-      <p>The Ace of Cups shows a chalice overflowing with five streams of water. The cup represents the vessel of your subconscious mind; the five streams are your five senses and the abundant emotion and intuition flowing from within you. The hand holding the cup is sliding out of the clouds, a symbol of your awareness of spiritual energy and influence. Below the hand is a vast sea covered with lotus blossoms, signifying the awakening of the human spirit. A dove descends towards the cup – a symbol of Divine love flowing through the subconscious mind to conscious awareness.</p>
+      <p class="keywords">${keywords.join(' / ')}</p>
+      <p>${data['tarot_interpretations'][pullCards[i]]['fortune_telling'].join(', ')}</p>
+
+      <h4>When ${positionCard[reverseOrNot[i]]}</h4>
+      <p>${data['tarot_interpretations'][pullCards[i]]['meanings'][positionCard[reverseOrNot[i]]].join(', ')}</p>
       </li>
       `
     )
+
   }
 }
 
