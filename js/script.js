@@ -45,7 +45,7 @@ function clearTable(){
 var restCards = allCards;
 
 function tirage(num, spread = []) {
-  ul.innerHTML = "";
+  ul.innerHTML = " ";
   pullCards = [];
   reverseOrNot = [];
   var shuffledCard = shuffle(deck);
@@ -55,7 +55,8 @@ function tirage(num, spread = []) {
 
     var keywords = data['tarot_interpretations'][shuffledCard[i]]['keywords'];
 
-    $('ul.card').append(`
+    document.querySelectorAll('ul.card').forEach(item => item.innerHTML+=
+      `
       <li class="${positionCard[reverseOrNot[i]]}" style="animation: fadein ${(i+1)*1.2}s;">
       <h1>${(spread[i])? spread[i] : ''}</h1>
       <h2 class="card-title">${allCards[shuffledCard[i]]} ${(reverseOrNot[i] == 0 )? '': '(Reversed)'} </h2>
