@@ -59,7 +59,5 @@ li.reversed img{
   border-radius:10px;
 }
 
-#resultID {
-  background-color: #fff;
-  color: black;
-}
+#resultIDcontainer::selection { background: #6fe300; }
+

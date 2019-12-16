@@ -72,12 +72,19 @@ function tirage(num, spread = []) {
     )
   }
   generatedID = generatedID.join('u');
-  document.getElementById('resultID').innerHTML = generatedID
+  document.getElementById('resultID').innerHTML = 
+  `<input type="text" value="${generatedID}" id="resultIDcontainer" />
+   <button onClick="copyResultID()" id="copyBtn">Copy</button>
+  `
   generatedID = [];
 
 }
 
-
+function copyResultID(){
+  document.getElementById('resultIDcontainer').select()
+  document.execCommand("copy");
+  document.getElementById('copyBtn').innerHTML = 'Copied!'
+}
 
 function resultIDdecoder(str){
   str = str.toString().split('u')
