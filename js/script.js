@@ -53,7 +53,6 @@ function tirage(num, spread = []) {
     reverseOrNot.push(Math.round(Math.random()))
     // console.log(`${shuffledCard[i]} ${reverseOrNot[i]}`);
     generatedID.push(`${shuffledCard[i]}-${reverseOrNot[i]}`)
-    generatedID.join('c')
     var keywords = data['tarot_interpretations'][shuffledCard[i]]['keywords'];
 
     document.querySelectorAll('ul.card').forEach(item => item.innerHTML+=
@@ -71,7 +70,10 @@ function tirage(num, spread = []) {
       `
     )
   }
-  generatedID = generatedID.join('u');
+  console.log(generatedID)
+  generatedID = btoa(generatedID)
+  console.log(generatedID)
+
   document.getElementById('resultID').innerHTML = 
   `<input type="text" value="${generatedID}" id="resultIDcontainer" />
    <button onClick="copyResultID()" id="copyBtn">Copy</button>
@@ -87,10 +89,9 @@ function copyResultID(){
 }
 
 function resultIDdecoder(str){
-  str = str.toString().split('u')
+  return atob(str);
 }
 
-resultIDdecoder(resultID)
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
   while (0 !== currentIndex) {
