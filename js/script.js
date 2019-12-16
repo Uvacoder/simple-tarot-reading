@@ -41,9 +41,8 @@ var ul = document.querySelector('ul.card');
 function clearTable(){
   ul.innerHTML = "";
 }
-
+let generatedID = [];
 var restCards = allCards;
-
 function tirage(num, spread = []) {
   ul.innerHTML = " ";
   pullCards = [];
@@ -52,7 +51,9 @@ function tirage(num, spread = []) {
 
   for(var i=0; i<num; i++) {
     reverseOrNot.push(Math.round(Math.random()))
-
+    // console.log(`${shuffledCard[i]} ${reverseOrNot[i]}`);
+    generatedID.push(`${shuffledCard[i]}-${reverseOrNot[i]}`)
+    generatedID.join('c')
     var keywords = data['tarot_interpretations'][shuffledCard[i]]['keywords'];
 
     document.querySelectorAll('ul.card').forEach(item => item.innerHTML+=
@@ -70,9 +71,19 @@ function tirage(num, spread = []) {
       `
     )
   }
+  generatedID = generatedID.join('u');
+  document.getElementById('resultID').innerHTML = generatedID
+  generatedID = [];
+
 }
 
 
+
+function resultIDdecoder(str){
+  str = str.toString().split('u')
+}
+
+resultIDdecoder(resultID)
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
   while (0 !== currentIndex) {

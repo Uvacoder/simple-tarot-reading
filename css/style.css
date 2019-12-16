@@ -58,3 +58,8 @@ li.reversed img{
   background-color: #eee;
   border-radius:10px;
 }
+
+#resultID {
+  background-color: #fff;
+  color: black;
+}

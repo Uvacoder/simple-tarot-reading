@@ -11,6 +11,8 @@
 <body>
 	<h1> Tarot Reading</h1>
 	<p>Ask yourself a question, deep breathe, and pull your cards</p>
+	<input type="text" id="searchID" placeholder="Enter tarot result ID">
+	<button id="resultID-btn">Enter</button>
 	<div class="buttons">
   	  <button onclick="tirage(1, oneCard)">One Card</button>
 	  <button onclick="tirage(3, threeFates)">Three Fates</button>
@@ -18,6 +20,9 @@
 	  <button onclick="tirage(7, relationship)">Relationship</button>
 	  <!-- <button onclick="clearTable()">Empty the table</button> -->
 	</div>
+
+	<p>Tarot ID: <span id="resultID"></span> <button>Copy</button></p>
+
 	<ul class="card">
 	</ul>
 </body>
